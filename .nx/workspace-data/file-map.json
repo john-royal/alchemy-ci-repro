@@ -6,24 +6,16 @@
   "fileMap": {
     "nonProjectFiles": [
       {
+        "file": "bunfig.toml",
+        "hash": "8035298334415837753"
+      },
+      {
         "file": ".github/workflows/ci.yml",
-        "hash": "15547124127439747326"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "9872462760817995039"
-      },
-      {
-        "file": "NOTES.md",
-        "hash": "13959425886863801147"
+        "hash": "7415842338368884292"
       },
       {
         "file": "README.md",
         "hash": "17001154757613564463"
-      },
-      {
-        "file": "bunfig.toml",
-        "hash": "8035298334415837753"
       },
       {
         "file": "nx.json",
@@ -32,6 +24,14 @@
       {
         "file": "package.json",
         "hash": "7602860364872714115"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "9872462760817995039"
+      },
+      {
+        "file": "NOTES.md",
+        "hash": "13959425886863801147"
       }
     ],
     "projectFileMap": {
@@ -93,7 +93,7 @@
         },
         {
           "file": "apps/frontend/vite.config.ts",
-          "hash": "12359066949326856288"
+          "hash": "14607442498451987971"
         },
         {
           "file": "apps/frontend/worker-configuration.d.ts",

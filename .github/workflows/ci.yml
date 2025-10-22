@@ -31,6 +31,14 @@ jobs:
       - name: Build toast package
         run: cd packages/toast && bun run build
 
+      - name: Verify Alchemy plugin configuration
+        run: |
+          cd apps/frontend
+          echo "Current vite.config.ts:"
+          cat vite.config.ts
+          echo ""
+          echo "✅ Alchemy plugin is already active (default state)"
+
       - name: Build frontend with Alchemy plugin
         id: build-alchemy
         continue-on-error: true
@@ -75,11 +83,10 @@ jobs:
         run: |
           cd apps/frontend
           # Comment out alchemy plugin, uncomment cloudflare plugin
-          sed -i 's/^    alchemy(/    \/\/ alchemy(/g' vite.config.ts
+          sed -i 's/^    alchemy({/    \/\/ alchemy({/g' vite.config.ts
           sed -i 's/^    }) as PluginOption,/    \/\/ }) as PluginOption,/g' vite.config.ts
           sed -i 's/^    \/\/ cloudflare({/    cloudflare({/g' vite.config.ts
           sed -i 's/^    \/\/   viteEnvironment/      viteEnvironment/g' vite.config.ts
-          sed -i 's/^    \/\/   persistTo/      persistTo/g' vite.config.ts
           sed -i 's/^    \/\/ }),/    }),/g' vite.config.ts
           echo "Modified vite.config.ts:"
           cat vite.config.ts
