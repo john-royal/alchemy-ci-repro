@@ -1,0 +1,11 @@
+node_modules/
+.react-router/
+build/
+dist/
+.alchemy/
+.wrangler/
+bun.lock
+bun.lockb
+*.log
+.DS_Store
+

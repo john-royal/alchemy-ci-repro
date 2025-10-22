@@ -1,0 +1,9 @@
+[install]
+# Critical: Disable peer deps resolution (strict dependency resolution)
+peer = false
+linker = "isolated"
+frozenLockfile = false
+registry = "https://registry.npmjs.org"
+optional = true
+dev = true
+

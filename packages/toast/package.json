@@ -1,0 +1,35 @@
+{
+  "name": "@repro/toast",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "workerd": {
+        "import": "./dist/server/index.js"
+      },
+      "node": {
+        "import": "./dist/server/index.js"
+      },
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": ["dist"],
+  "peerDependencies": {
+    "react-router": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "catalog:",
+    "@types/bun": "catalog:",
+    "react-router": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "zod": "catalog:"
+  },
+  "scripts": {
+    "build": "tsdown"
+  }
+}
+
