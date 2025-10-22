@@ -1,0 +1,19 @@
+> nx run @repro/frontend:build
+
+[0m[2m[35m$[0m [2m[1mreact-router build[0m
+Using Vite Environment API (experimental)
+[36mrolldown-vite v7.1.19 [32mbuilding for production...[36m[39m
+[2K[32m✓[39m 22 modules transformed.
+[2Krendering chunks (0)...[2Krendering chunks (1)...[2Krendering chunks (2)...[2Krendering chunks (3)...[2K[2Kcomputing gzip size (0)...[2Kcomputing gzip size (6)...[2K[2mbuild/client[0m/[32m.assetsignore                    [39m[2m[1m0.02 kB[0m[0m
+[2mbuild/client[0m/[32m.vite/manifest.json              [39m[2m[1m0.85 kB[0m[0m │ gzip: [2m 0.25 kB[0m
+[2mbuild/client[0m/[32mwrangler.json                    [39m[2m[1m1.08 kB[0m[0m │ gzip: [2m 0.54 kB[0m
+[2mbuild/client[0m/[2massets/[0m[36mhome-CQFkweXc.js          [39m[2m[1m0.17 kB[0m[0m │ gzip: [2m 0.16 kB[0m
+[2mbuild/client[0m/[2massets/[0m[36mroot-DaOD3LrX.js          [39m[2m[1m0.31 kB[0m[0m │ gzip: [2m 0.21 kB[0m
+[2mbuild/client[0m/[2massets/[0m[36mjsx-runtime-DfaBrhL0.js   [39m[2m[1m116.05 kB[0m[0m │ gzip: [2m38.59 kB[0m
+[2mbuild/client[0m/[2massets/[0m[36mentry.client-h2d3kX0M.js  [39m[2m[1m186.28 kB[0m[0m │ gzip: [2m58.82 kB[0m
+[32m✓ built in 80ms[39m
+[36mrolldown-vite v7.1.19 [32mbuilding SSR bundle for production...[36m[39m
+[2K[32m✓[39m 5 modules transformed.
+[2Krendering chunks (0)...[2K[2Kcomputing gzip size (0)...[2Kcomputing gzip size (2)...[2K[2mbuild/server[0m/[32m.vite/manifest.json  [39m[2m[1m0.16 kB[0m[0m │ gzip: [2m0.12 kB[0m
+[2mbuild/server[0m/[36mindex.js             [39m[2m[1m4.63 kB[0m[0m │ gzip: [2m1.71 kB[0m
+[32m✓ built in 28ms[39m

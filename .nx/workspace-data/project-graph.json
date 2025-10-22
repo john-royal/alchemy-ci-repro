@@ -1,0 +1,147 @@
+{
+  "nodes": {
+    "@repro/toast": {
+      "name": "@repro/toast",
+      "type": "lib",
+      "data": {
+        "root": "packages/toast",
+        "name": "@repro/toast",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "build"
+            ]
+          },
+          "js": {
+            "packageName": "@repro/toast",
+            "packageVersion": "1.0.0",
+            "packageExports": {
+              "./server": {
+                "types": "./dist/server/index.d.ts",
+                "workerd": {
+                  "import": "./dist/server/index.js"
+                },
+                "node": {
+                  "import": "./dist/server/index.js"
+                },
+                "default": "./dist/server/index.js"
+              }
+            },
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "build": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build"
+            },
+            "metadata": {
+              "scriptContent": "tsdown",
+              "runCommand": "bun run build -- undefined"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "outputs": [
+              "{projectRoot}/dist"
+            ]
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "@repro/frontend": {
+      "name": "@repro/frontend",
+      "type": "app",
+      "data": {
+        "root": "apps/frontend",
+        "name": "@repro/frontend",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "build",
+              "start",
+              "dev"
+            ]
+          },
+          "js": {
+            "packageName": "@repro/frontend",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "build": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build"
+            },
+            "metadata": {
+              "scriptContent": "react-router build",
+              "runCommand": "bun run build -- undefined"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "production",
+              "^production"
+            ],
+            "outputs": [
+              "{projectRoot}/dist"
+            ]
+          },
+          "start": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "start"
+            },
+            "metadata": {
+              "scriptContent": "react-router start --port 3000",
+              "runCommand": "bun run start -- undefined"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "dev": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "dev"
+            },
+            "metadata": {
+              "scriptContent": "react-router dev",
+              "runCommand": "bun run dev -- undefined"
+            },
+            "configurations": {},
+            "parallelism": true
+          }
+        },
+        "implicitDependencies": []
+      }
+    }
+  },
+  "externalNodes": {},
+  "dependencies": {
+    "@repro/toast": [],
+    "@repro/frontend": [
+      {
+        "source": "@repro/frontend",
+        "target": "@repro/toast",
+        "type": "static"
+      }
+    ]
+  },
+  "version": "6.0",
+  "errors": [],
+  "computedAt": 1761173777059
+}

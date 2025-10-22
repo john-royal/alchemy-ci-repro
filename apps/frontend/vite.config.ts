@@ -13,17 +13,14 @@ export default defineConfig({
   logLevel: "info",
   plugins: [
     // ❌ FAILS: Rolldown failed to resolve import "cloudflare:workers"
-    alchemy({
-      persistState: {
-        path: path.join(__dirname, ".alchemy", "miniflare"),
-      },
-      viteEnvironment: { name: "ssr" },
-    }) as PluginOption,
+    // alchemy({
+    //   viteEnvironment: { name: "ssr" },
+    // }) as PluginOption,
 
     // ✅ WORKAROUND: Comment alchemy and uncomment this (though may also fail with rolldown-vite)
-    // cloudflare({
-    //   viteEnvironment: { name: "ssr" },
-    // }),
+    cloudflare({
+      viteEnvironment: { name: "ssr" },
+    }),
 
     reactRouter(),
     tsconfigPaths(),

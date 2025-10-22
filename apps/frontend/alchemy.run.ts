@@ -7,7 +7,7 @@ const app = await alchemy("alchemy-ci-repro", {
 })
 
 export const worker = await ReactRouter("frontend", {
-  main: "./app/entry.server.tsx",
+  main: "./workers/app.ts",
   bindings: {
     SESSION_SECRET: alchemy.secret(process.env.SESSION_SECRET || "test-secret"),
   },

@@ -1,9 +1,8 @@
-import { type RouteConfig } from "@react-router/dev/routes"
+import { index, type RouteConfig } from "@react-router/dev/routes"
 
 export default [
-  {
-    path: "/",
-    file: "./routes/home.tsx",
-  },
+  index("routes/home.tsx"),
 ] satisfies RouteConfig
+
+
 
