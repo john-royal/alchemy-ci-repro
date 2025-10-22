@@ -16,12 +16,15 @@ bun react-router build
 ## To Test
 
 ### Test with Alchemy (fails in CI)
-Currently configured. Just run build.
+
+Currently configured in `apps/frontend/vite.config.ts` (lines 16-18 uncommented). Just run build.
 
 ### Test with Cloudflare plugin (works in CI)
+
 Edit `apps/frontend/vite.config.ts`:
-- Comment out the `alchemy()` plugin
-- Uncomment the `cloudflare()` plugin
+
+- Comment out the `alchemy()` plugin (lines 16-18)
+- Uncomment the `cloudflare()` plugin (lines 21-23)
 - Run `bun react-router build`
 
 ## Key Files
@@ -40,8 +43,8 @@ Edit `apps/frontend/vite.config.ts`:
 
 This repository includes a GitHub Actions workflow (`.github/workflows/ci.yml`) that:
 
-1. **Build with Alchemy Plugin** - Demonstrates the failure in CI environment
-2. **Build with Cloudflare Plugin** - Demonstrates the workaround by switching plugins
+1. **Build with Alchemy Plugin** - Uses Alchemy plugin as configured (default state). Demonstrates the failure in CI environment.
+2. **Build with Cloudflare Plugin** - Switches to Cloudflare plugin using sed commands. Demonstrates the workaround by switching plugins.
 
 The workflow runs on `ubuntu-latest` with Node.js 24 and Bun 1.3.0, matching the environment where the bug occurs.
 
@@ -50,22 +53,26 @@ The workflow runs on `ubuntu-latest` with Node.js 24 and Bun 1.3.0, matching the
 ✅ **Successfully reproduces the build failure!**
 
 This reproduction demonstrates a **build failure** that occurs when using:
+
 - Alchemy plugin with rolldown-vite
 - cloudflare:workers imports in middleware (in `app/middleware/toast.server.ts`)
 - React Router 7 SSR setup
 - Bun workspace with strict peer dependency resolution
 
 The error manifests locally as:
+
 ```
 Error: [vite]: Rolldown failed to resolve import "cloudflare:workers"
 ```
 
 In CI environments, this may also surface as:
+
 ```
 [commonjs--resolver] Missing "./v4/core" specifier in "zod" package
 ```
 
 **Key Architecture**:
+
 - Toast workspace package (`@repro/toast`) does NOT use cloudflare:workers
 - Frontend app middleware DOES use `cloudflare:workers` for env.SESSION_SECRET
 - This mimics real-world usage where app code uses Cloudflare bindings
@@ -103,6 +110,7 @@ bun react-router build
 ## Error Messages to Reproduce
 
 ### Error 1: Standard Vite (rolldown-vite)
+
 ```
 [commonjs--resolver] Missing "./v4/core" specifier in "zod" package
     at e
@@ -110,6 +118,7 @@ bun react-router build
 ```
 
 ### Error 2: Alternative with Rolldown
+
 ```
 Error: [vite]: Rolldown failed to resolve import "cloudflare:workers" from
 "/path/to/app/middleware/toast.server.ts"
@@ -119,17 +128,18 @@ Error: [vite]: Rolldown failed to resolve import "cloudflare:workers" from
 
 The reproduction allows testing:
 
-1. With Alchemy plugin (currently configured - should fail in CI)
+1. With Alchemy plugin (currently configured as default - should fail in CI)
 2. With Cloudflare plugin (comment/uncomment in vite.config.ts - should work)
 3. Different Vite versions (standard vs rolldown)
 
 ## Expected Behavior
 
 ### Local Environment (macOS, Bun 1.3.0)
+
 - ✅ Build succeeds with Alchemy plugin
 - ✅ Build succeeds with Cloudflare plugin
 
 ### CI Environment (ubuntu-latest, GitHub Actions, Bun 1.3.0)
+
 - ❌ Build fails with Alchemy plugin at final build stage
 - ✅ Build succeeds with Cloudflare plugin
-
