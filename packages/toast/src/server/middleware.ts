@@ -1,5 +1,4 @@
 import { AsyncLocalStorage } from "node:async_hooks"
-import { env } from "cloudflare:workers"
 import { type MiddlewareFunction } from "react-router"
 import { type Toast } from "../types"
 
@@ -23,9 +22,6 @@ export function createToastMiddleware(): [
     if (ToastStorage.getStore()) {
       return next()
     }
-
-    // Use Cloudflare env to demonstrate cloudflare:workers usage
-    const sessionSecret = env.SESSION_SECRET || "default-secret"
 
     const toastContextValue: ToastContext = { toast: null }
 

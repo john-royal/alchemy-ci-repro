@@ -47,17 +47,28 @@ The workflow runs on `ubuntu-latest` with Node.js 24 and Bun 1.3.0, matching the
 
 ## Current Reproduction Status
 
+✅ **Successfully reproduces the build failure!**
+
 This reproduction demonstrates a **build failure** that occurs when using:
 - Alchemy plugin with rolldown-vite
-- cloudflare:workers imports in middleware
+- cloudflare:workers imports in middleware (in `app/middleware/toast.server.ts`)
 - React Router 7 SSR setup
+- Bun workspace with strict peer dependency resolution
 
-The error manifests as:
+The error manifests locally as:
 ```
-Error: [vite]: Rolldown failed to resolve import "cloudflare:workers" from "..."
+Error: [vite]: Rolldown failed to resolve import "cloudflare:workers"
 ```
 
-This failure may manifest differently in CI environments and could also surface as a zod module resolution error (Missing "./v4/core" specifier in "zod" package) depending on the build environment and caching behavior.
+In CI environments, this may also surface as:
+```
+[commonjs--resolver] Missing "./v4/core" specifier in "zod" package
+```
+
+**Key Architecture**:
+- Toast workspace package (`@repro/toast`) does NOT use cloudflare:workers
+- Frontend app middleware DOES use `cloudflare:workers` for env.SESSION_SECRET
+- This mimics real-world usage where app code uses Cloudflare bindings
 
 ## Reproduction Points
 

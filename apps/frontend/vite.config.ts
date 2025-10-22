@@ -1,6 +1,6 @@
 import path, { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-// import { cloudflare } from "@cloudflare/vite-plugin"
+import { cloudflare } from "@cloudflare/vite-plugin"
 import { reactRouter } from "@react-router/dev/vite"
 import alchemy from "alchemy/cloudflare/react-router"
 import { defineConfig, type PluginOption } from "vite"
@@ -12,7 +12,7 @@ export default defineConfig({
   root: __dirname,
   logLevel: "info",
   plugins: [
-    // ❌ FAILS IN CI: Missing "./v4/core" specifier in "zod" package
+    // ❌ FAILS: Rolldown failed to resolve import "cloudflare:workers"
     alchemy({
       persistState: {
         path: path.join(__dirname, ".alchemy", "miniflare"),
@@ -20,10 +20,9 @@ export default defineConfig({
       viteEnvironment: { name: "ssr" },
     }) as PluginOption,
 
-    // ✅ WORKS IN CI: Comment alchemy and uncomment this
+    // ✅ WORKAROUND: Comment alchemy and uncomment this (though may also fail with rolldown-vite)
     // cloudflare({
     //   viteEnvironment: { name: "ssr" },
-    //   persistTo: path.join(__dirname, ".wrangler"),
     // }),
 
     reactRouter(),
