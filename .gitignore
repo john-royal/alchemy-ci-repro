@@ -8,4 +8,4 @@ bun.lock
 bun.lockb
 *.log
 .DS_Store
-
+.nx/

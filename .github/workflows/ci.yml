@@ -84,6 +84,7 @@ jobs:
           cd apps/frontend
           # Comment out alchemy plugin, uncomment cloudflare plugin
           sed -i 's/^    alchemy({/    \/\/ alchemy({/g' vite.config.ts
+          sed -i 's/^      viteEnvironment: { name: "ssr" },/      \/\/ viteEnvironment: { name: "ssr" },/g' vite.config.ts
           sed -i 's/^    }) as PluginOption,/    \/\/ }) as PluginOption,/g' vite.config.ts
           sed -i 's/^    \/\/ cloudflare({/    cloudflare({/g' vite.config.ts
           sed -i 's/^    \/\/   viteEnvironment/      viteEnvironment/g' vite.config.ts
