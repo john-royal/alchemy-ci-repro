@@ -10,11 +10,6 @@ jobs:
   build-with-alchemy:
     name: Build with Alchemy Plugin (Expected to Fail)
     runs-on: ubuntu-latest
-    env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      DO_NOT_TRACK: ${{ secrets.DO_NOT_TRACK }}
-      ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
 
     steps:
       - name: Checkout code
@@ -47,7 +42,7 @@ jobs:
       - name: Build frontend with Alchemy plugin
         id: build-alchemy
         continue-on-error: true
-        run: cd apps/frontend && bun alchemy deploy
+        run: cd apps/frontend && bun run build
 
       - name: Check build result
         run: |
@@ -59,51 +54,3 @@ jobs:
             echo "✅ Build succeeded with Alchemy plugin"
             echo "Bug may be environment-specific or already fixed"
           fi
-
-  build-with-cloudflare:
-    name: Build with Cloudflare Plugin (Expected to Succeed)
-    runs-on: ubuntu-latest
-    env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      DO_NOT_TRACK: ${{ secrets.DO_NOT_TRACK }}
-      ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.3.0
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Build toast package
-        run: cd packages/toast && bun run build
-
-      - name: Switch to Cloudflare plugin
-        run: |
-          cd apps/frontend
-          # Comment out alchemy plugin, uncomment cloudflare plugin
-          sed -i 's/^    alchemy() as PluginOption,/    \/\/ alchemy() as PluginOption,/g' vite.config.ts
-          sed -i 's/^    \/\/ cloudflare({/    cloudflare({/g' vite.config.ts
-          sed -i 's/^    \/\/   viteEnvironment/      viteEnvironment/g' vite.config.ts
-          sed -i 's/^    \/\/ }),/    }),/g' vite.config.ts
-          echo "Modified vite.config.ts:"
-          cat vite.config.ts
-
-      - name: Build frontend with Cloudflare plugin
-        run: cd apps/frontend && bun run build
-
-      - name: Check build result
-        run: |
-          echo "✅ Build succeeded with Cloudflare plugin"
-          echo "This demonstrates the workaround - switching plugins makes it work"
