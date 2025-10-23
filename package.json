@@ -16,7 +16,7 @@
       "@types/react": "^19.2.2",
       "@types/react-dom": "^19.2.2",
       "@vitejs/plugin-react": "^5.0.4",
-      "alchemy": "https://pkg.pr.new/alchemy-run/alchemy@daaee51",
+      "alchemy": "https://pkg.pr.new/alchemy-run/alchemy@284aca4",
       "isbot": "^5.1.31",
       "nx": "^21.6.4",
       "react": "19.2.0",
