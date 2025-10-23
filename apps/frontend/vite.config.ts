@@ -12,21 +12,7 @@ export default defineConfig({
   root: __dirname,
   logLevel: "info",
   plugins: [
-
-    {
-      name: "alchemy-supress-watch",
-      config() {
-        return {
-          server: {
-            watch: {
-              ignored: ["**/.alchemy/**"],
-            },
-          },
-        }
-      }
-    },
     alchemy(),
-
     reactRouter(),
     tsconfigPaths(),
   ],
