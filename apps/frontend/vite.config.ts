@@ -17,6 +17,19 @@ export default defineConfig({
       viteEnvironment: { name: "ssr" },
     }) as PluginOption,
 
+    {
+      name: "alchemy-supress-watch",
+      config() {
+        return {
+          server: {
+            watch: {
+              ignored: ["**/.alchemy/**"],
+            },
+          },
+        }
+      }
+    },
+    
     // ✅ WORKAROUND: Comment alchemy and uncomment this (though may also fail with rolldown-vite)
     // cloudflare({
     //   viteEnvironment: { name: "ssr" },

@@ -12,6 +12,7 @@ export const worker = await ReactRouter("frontend", {
     SESSION_SECRET: alchemy.secret(process.env.SESSION_SECRET || "test-secret"),
   },
   url: true,
+  adopt: true
 })
 
 await app.finalize()
