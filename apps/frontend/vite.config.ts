@@ -4,6 +4,7 @@ import { dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
+import alchemy from "alchemy/cloudflare/vite"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -24,9 +25,7 @@ export default defineConfig({
         }
       }
     },
-    cloudflare({
-      configPath: ".alchemy/local/wrangler.jsonc",
-      persistState: {path: ".alchemy/miniflare"},
+    alchemy({
       viteEnvironment: { name: "ssr" },
     }),
 
