@@ -27,6 +27,7 @@ export default defineConfig({
     cloudflare({
       configPath: ".alchemy/local/wrangler.jsonc",
       persistState: {path: ".alchemy/miniflare"},
+      viteEnvironment: { name: "ssr" },
     }),
 
     reactRouter(),
