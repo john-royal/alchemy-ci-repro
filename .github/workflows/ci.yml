@@ -10,6 +10,11 @@ jobs:
   build-with-alchemy:
     name: Build with Alchemy Plugin (Expected to Fail)
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      DO_NOT_TRACK: ${{ secrets.DO_NOT_TRACK }}
+      ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
 
     steps:
       - name: Checkout code
@@ -58,6 +63,11 @@ jobs:
   build-with-cloudflare:
     name: Build with Cloudflare Plugin (Expected to Succeed)
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      DO_NOT_TRACK: ${{ secrets.DO_NOT_TRACK }}
+      ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
 
     steps:
       - name: Checkout code
