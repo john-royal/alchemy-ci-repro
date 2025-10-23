@@ -13,9 +13,7 @@ export default defineConfig({
   logLevel: "info",
   plugins: [
     // ❌ FAILS: Rolldown failed to resolve import "cloudflare:workers"
-    alchemy({
-      viteEnvironment: { name: "ssr" },
-    }) as PluginOption,
+    alchemy() as PluginOption,
 
     {
       name: "alchemy-supress-watch",
@@ -29,7 +27,7 @@ export default defineConfig({
         }
       }
     },
-    
+
     // ✅ WORKAROUND: Comment alchemy and uncomment this (though may also fail with rolldown-vite)
     // cloudflare({
     //   viteEnvironment: { name: "ssr" },
