@@ -10,6 +10,7 @@ export const worker = await ReactRouter("frontend", {
   main: "./workers/app.ts",
   bindings: {
     SESSION_SECRET: alchemy.secret(process.env.SESSION_SECRET || "test-secret"),
+    VALUE_FROM_CLOUDFLARE: alchemy.secret(process.env.VALUE_FROM_CLOUDFLARE || "Hello from Cloudflare"),
   },
   url: true,
   adopt: true
