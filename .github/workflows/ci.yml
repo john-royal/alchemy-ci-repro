@@ -42,7 +42,7 @@ jobs:
       - name: Build frontend with Alchemy plugin
         id: build-alchemy
         continue-on-error: true
-        run: cd apps/frontend && bun run build
+        run: cd apps/frontend && bun alchemy deploy
 
       - name: Check build result
         run: |
